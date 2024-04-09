@@ -1,6 +1,8 @@
 import { useState } from "react";
 import eventsData from "./data";
 import { v1 as generateUniqueID } from "uuid";
+import Attendees from "./Components/Attendees";
+import Attendee from "./Components/Attendee";
 import Event from "./Components/Event";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -8,11 +10,11 @@ import NewEventForm from "./Components/NewEventForm";
 
 function App() {
   const [events, setEvents] = useState(eventsData);
-  const [showAttendees, setShowAttendees] = useState(false);
+
   const [selectOption, setSelectOption] = useState("");
-  
+
   const [newEvent, setNewEvent] = useState({
-    id: generateUniqueID(),
+    id: "",
     eventType: "",
     name: "",
     organizer: "",
@@ -67,21 +69,17 @@ function App() {
     setEvents([event, ...events]);
   }
 
-  function toggleEventAttendees() {
-    setShowAttendees(!showAttendees);
-  }
-
   function updateEventAttendance(eventId, attendeeId) {
     const eventArray = [...events];
     const eventIndex = eventArray.findIndex((event) => eventId === event.id);
-    const eventCopy = { ...eventArray[eventIndex] };
-    const personIndex = eventCopy.people.findIndex(
+    const event = { ...eventArray[eventIndex] };
+    const personIndex = event.people.findIndex(
       (person) => person.id === attendeeId
     );
-    const peopleArray = [...eventCopy.people];
+    const peopleArray = [...event.people];
     peopleArray[personIndex].attendance = !peopleArray[personIndex].attendance;
-    eventCopy.people = peopleArray;
-    eventArray[eventIndex] = eventCopy;
+    event.people = peopleArray;
+    eventArray[eventIndex] = event;
     setEvents(eventArray);
   }
 
@@ -89,18 +87,8 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <NewEventForm
-          handleSubmit={handleSubmit}
-          handleSelectChange={handleSelectChange}
-          handleTextChange={handleTextChange}
-          newEvent={newEvent}
-        />
-        <Event
-          events={events}
-          showAttendees={showAttendees}
-          toggleEventAttendees={toggleEventAttendees}
-          updateEventAttendance={updateEventAttendance}
-        />
+        <NewEventForm newEvent={newEvent} handleSubmit={handleSubmit} handleTextChange={handleTextChange} handleSelectChange={handleSelectChange} addEvent={addEvent} resetEventForm={resetEventForm} />
+        <Event Attendee={Attendee} Attendees={Attendees} events={events} updateEventAttendance={updateEventAttendance}/>
       </main>
       <Footer />
     </div>
