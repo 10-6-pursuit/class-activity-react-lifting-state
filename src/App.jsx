@@ -87,8 +87,20 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <NewEventForm newEvent={newEvent} handleSubmit={handleSubmit} handleTextChange={handleTextChange} handleSelectChange={handleSelectChange} addEvent={addEvent} resetEventForm={resetEventForm} />
-        <Event Attendee={Attendee} Attendees={Attendees} events={events} updateEventAttendance={updateEventAttendance}/>
+        <NewEventForm
+          newEvent={newEvent}
+          handleSubmit={handleSubmit}
+          handleTextChange={handleTextChange}
+          handleSelectChange={handleSelectChange}
+          addEvent={addEvent}
+          resetEventForm={resetEventForm}
+        />
+        <Event
+          Attendee={Attendee}
+          Attendees={Attendees}
+          events={events}
+          updateEventAttendance={updateEventAttendance}
+        />
       </main>
       <Footer />
     </div>
