@@ -1,6 +1,5 @@
 export default function Event({ Attendee, Attendees, events, updateEventAttendance }) {
 
-
   return(
     <div className="events">
           <ul>

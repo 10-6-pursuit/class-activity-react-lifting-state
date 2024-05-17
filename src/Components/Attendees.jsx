@@ -16,11 +16,10 @@ export default function Attendees({ event, updateEventAttendance, Attendee, atte
                       {showAttendees ? (
                         <div className="attendees">
                           {attendees.map((attendee, index) => (
-                            <Attendee event={event} updateEventAttendance={updateEventAttendance} attendee={attendee}/>
+                            <Attendee event={event} key={index} updateEventAttendance={updateEventAttendance} attendee={attendee}/>
                           ))}
                         </div>
                       ) : null }
-      
     </>
   )
 }
